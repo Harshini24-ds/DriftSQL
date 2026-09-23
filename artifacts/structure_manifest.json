@@ -1,0 +1,227 @@
+[
+  {
+    "path": ".gitignore",
+    "size": 498,
+    "sha256": "be366eee98792607623f312e538b037a820141e3bcbe6948ce738905336b0640"
+  },
+  {
+    "path": "README.md",
+    "size": 871,
+    "sha256": "146ea9b76b674cb2742f9f1eed635e62d18ad0ade4ffe422d0631fde0c9a8f35"
+  },
+  {
+    "path": "apps/api/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "apps/ui/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "artifacts/dataset_profile.json",
+    "size": 19996,
+    "sha256": "6016732b668affe762f35ca7a08de9145545ede9df5927f1a8e55d4bb99d3d00"
+  },
+  {
+    "path": "datasets/held_out/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "datasets/processed/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "datasets/raw/olist/olist_customers_dataset.csv",
+    "size": 9033957,
+    "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+  },
+  {
+    "path": "datasets/raw/olist/olist_geolocation_dataset.csv",
+    "size": 61273883,
+    "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6"
+  },
+  {
+    "path": "datasets/raw/olist/olist_order_items_dataset.csv",
+    "size": 15438671,
+    "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279"
+  },
+  {
+    "path": "datasets/raw/olist/olist_order_payments_dataset.csv",
+    "size": 5777138,
+    "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0"
+  },
+  {
+    "path": "datasets/raw/olist/olist_order_reviews_dataset.csv",
+    "size": 14451670,
+    "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7"
+  },
+  {
+    "path": "datasets/raw/olist/olist_orders_dataset.csv",
+    "size": 17654914,
+    "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+  },
+  {
+    "path": "datasets/raw/olist/olist_products_dataset.csv",
+    "size": 2379446,
+    "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc"
+  },
+  {
+    "path": "datasets/raw/olist/olist_sellers_dataset.csv",
+    "size": 174703,
+    "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e"
+  },
+  {
+    "path": "datasets/raw/olist/product_category_name_translation.csv",
+    "size": 2613,
+    "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+  },
+  {
+    "path": "docs/data_model.md",
+    "size": 4458,
+    "sha256": "098569b405edff6184c28c383e4449f696b9eabd08de5d5971935880999b33a6"
+  },
+  {
+    "path": "docs/dataset_audit.md",
+    "size": 7725,
+    "sha256": "2c267d1c2a04d324ed718569bcf64a25152eef91f9ab684a72f7bdaa6b8525b5"
+  },
+  {
+    "path": "docs/postgres_setup.md",
+    "size": 2144,
+    "sha256": "3ac8f378877399a786f31bb35e54b5034dc26e15d88f1fa571da0e3a80d8fd13"
+  },
+  {
+    "path": "experiments/ablations/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "experiments/baselines/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "experiments/results/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "migrations/001_create_olist_raw.sql",
+    "size": 2114,
+    "sha256": "50d9b740ed530b47b21345a5352e1587371ffa69d41a558924a14473eaac78b0"
+  },
+  {
+    "path": "scripts/import_olist.py",
+    "size": 3784,
+    "sha256": "3ba907c91c3f721c4fa46d20f2950b4683371f2a458f7c5e985bf4e8f899bc35"
+  },
+  {
+    "path": "src/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/audit/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/clarification/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/contracts/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/data/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/data/adapters/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/data/adapters/base.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/eeva/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/evidence/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/execution/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/explanation/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/join_reasoning/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/query_intelligence/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/retrieval/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/security/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/self_correction/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/sql_validation/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/text_to_sql/__init__.py",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "tests/golden/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "tests/integration/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "tests/unit/.gitkeep",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

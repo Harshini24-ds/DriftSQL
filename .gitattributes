@@ -1,0 +1,9 @@
+# Keep source files consistent in Git
+*.py text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+
+# Raw datasets must remain byte-for-byte unchanged
+*.csv -text

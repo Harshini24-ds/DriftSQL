@@ -1,0 +1,529 @@
+{
+  "database_id": "olist_primary",
+  "schema": "olist_raw",
+  "tables": [
+    {
+      "table_name": "customers",
+      "columns": [
+        {
+          "column_name": "customer_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "customer_unique_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "customer_zip_code_prefix",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "customer_city",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "customer_state",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        }
+      ]
+    },
+    {
+      "table_name": "geolocation",
+      "columns": [
+        {
+          "column_name": "geolocation_zip_code_prefix",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "geolocation_lat",
+          "data_type": "double precision",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "geolocation_lng",
+          "data_type": "double precision",
+          "udt_name": "float8",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "geolocation_city",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "geolocation_state",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        }
+      ]
+    },
+    {
+      "table_name": "order_items",
+      "columns": [
+        {
+          "column_name": "order_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "order_item_id",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "product_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "seller_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "shipping_limit_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        },
+        {
+          "column_name": "price",
+          "data_type": "numeric",
+          "udt_name": "numeric",
+          "is_nullable": "YES",
+          "ordinal_position": 6
+        },
+        {
+          "column_name": "freight_value",
+          "data_type": "numeric",
+          "udt_name": "numeric",
+          "is_nullable": "YES",
+          "ordinal_position": 7
+        }
+      ]
+    },
+    {
+      "table_name": "order_payments",
+      "columns": [
+        {
+          "column_name": "order_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "payment_sequential",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "payment_type",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "payment_installments",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "payment_value",
+          "data_type": "numeric",
+          "udt_name": "numeric",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        }
+      ]
+    },
+    {
+      "table_name": "order_reviews",
+      "columns": [
+        {
+          "column_name": "review_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "order_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "review_score",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "review_comment_title",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "review_comment_message",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        },
+        {
+          "column_name": "review_creation_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 6
+        },
+        {
+          "column_name": "review_answer_timestamp",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 7
+        }
+      ]
+    },
+    {
+      "table_name": "orders",
+      "columns": [
+        {
+          "column_name": "order_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "customer_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "order_status",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "order_purchase_timestamp",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "order_approved_at",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        },
+        {
+          "column_name": "order_delivered_carrier_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 6
+        },
+        {
+          "column_name": "order_delivered_customer_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 7
+        },
+        {
+          "column_name": "order_estimated_delivery_date",
+          "data_type": "timestamp without time zone",
+          "udt_name": "timestamp",
+          "is_nullable": "YES",
+          "ordinal_position": 8
+        }
+      ]
+    },
+    {
+      "table_name": "product_category_name_translation",
+      "columns": [
+        {
+          "column_name": "product_category_name",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "product_category_name_english",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        }
+      ]
+    },
+    {
+      "table_name": "products",
+      "columns": [
+        {
+          "column_name": "product_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "product_category_name",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "product_name_lenght",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "product_description_lenght",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        },
+        {
+          "column_name": "product_photos_qty",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 5
+        },
+        {
+          "column_name": "product_weight_g",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 6
+        },
+        {
+          "column_name": "product_length_cm",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 7
+        },
+        {
+          "column_name": "product_height_cm",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 8
+        },
+        {
+          "column_name": "product_width_cm",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 9
+        }
+      ]
+    },
+    {
+      "table_name": "sellers",
+      "columns": [
+        {
+          "column_name": "seller_id",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 1
+        },
+        {
+          "column_name": "seller_zip_code_prefix",
+          "data_type": "integer",
+          "udt_name": "int4",
+          "is_nullable": "YES",
+          "ordinal_position": 2
+        },
+        {
+          "column_name": "seller_city",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 3
+        },
+        {
+          "column_name": "seller_state",
+          "data_type": "text",
+          "udt_name": "text",
+          "is_nullable": "YES",
+          "ordinal_position": 4
+        }
+      ]
+    }
+  ],
+  "strict_relationships": [
+    {
+      "child_table": "orders",
+      "child_columns": [
+        "customer_id"
+      ],
+      "parent_table": "customers",
+      "parent_columns": [
+        "customer_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    },
+    {
+      "child_table": "order_items",
+      "child_columns": [
+        "order_id"
+      ],
+      "parent_table": "orders",
+      "parent_columns": [
+        "order_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    },
+    {
+      "child_table": "order_payments",
+      "child_columns": [
+        "order_id"
+      ],
+      "parent_table": "orders",
+      "parent_columns": [
+        "order_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    },
+    {
+      "child_table": "order_reviews",
+      "child_columns": [
+        "order_id"
+      ],
+      "parent_table": "orders",
+      "parent_columns": [
+        "order_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    },
+    {
+      "child_table": "order_items",
+      "child_columns": [
+        "product_id"
+      ],
+      "parent_table": "products",
+      "parent_columns": [
+        "product_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    },
+    {
+      "child_table": "order_items",
+      "child_columns": [
+        "seller_id"
+      ],
+      "parent_table": "sellers",
+      "parent_columns": [
+        "seller_id"
+      ],
+      "relationship_type": "STRICT_VERIFIED",
+      "verification": "DATA-003 orphan_rows=0"
+    }
+  ],
+  "non_strict_lookups": [
+    {
+      "child_table": "products",
+      "child_columns": [
+        "product_category_name"
+      ],
+      "parent_table": "product_category_name_translation",
+      "parent_columns": [
+        "product_category_name"
+      ],
+      "relationship_type": "NON_STRICT_LOOKUP",
+      "unmatched_rows": 13
+    },
+    {
+      "child_table": "customers",
+      "child_columns": [
+        "customer_zip_code_prefix"
+      ],
+      "parent_table": "geolocation",
+      "parent_columns": [
+        "geolocation_zip_code_prefix"
+      ],
+      "relationship_type": "NON_STRICT_LOOKUP",
+      "unmatched_rows": 278
+    },
+    {
+      "child_table": "sellers",
+      "child_columns": [
+        "seller_zip_code_prefix"
+      ],
+      "parent_table": "geolocation",
+      "parent_columns": [
+        "geolocation_zip_code_prefix"
+      ],
+      "relationship_type": "NON_STRICT_LOOKUP",
+      "unmatched_rows": 7
+    }
+  ],
+  "schema_hash": "9544788f24808fb3ccfcfb2f798954f9059db40d4f92bfed10fa71d3a9f2f560",
+  "created_at": "2026-09-21T08:39:30.762192+00:00"
+}

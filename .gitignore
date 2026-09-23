@@ -1,0 +1,28 @@
+# Python / local environment
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets / local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local experiment outputs
+experiments/results/*
+!experiments/results/.gitkeep
+
+
+# Local logs
+*.log
+logs/
