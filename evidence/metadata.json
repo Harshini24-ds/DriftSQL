@@ -1,0 +1,174 @@
+{
+  "format_version": 1,
+  "database_id": "olist_primary",
+  "schema": "olist_raw",
+  "schema_hash": "9544788f24808fb3ccfcfb2f798954f9059db40d4f92bfed10fa71d3a9f2f560",
+  "metadata_version": "olist-metadata-draft-v1",
+  "status": "DRAFT_FOR_TEAM_REVIEW",
+  "source": "team_curated_metadata",
+  "access_label": "internal",
+  "records": [
+    {
+      "target": "olist_raw.customers",
+      "scope": "olist_raw.customers",
+      "description": "Customer records. customer_id is verified unique and non-null in the DATA-003 model.",
+      "aliases": ["customer"],
+      "business_terms": ["customer"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-CUSTOMERS"
+    },
+    {
+      "target": "olist_raw.geolocation",
+      "scope": "olist_raw.geolocation",
+      "description": "Postal-code geolocation records. The source contains exact duplicate rows and has no natural unique key.",
+      "aliases": ["geolocation"],
+      "business_terms": ["geolocation"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-GEOLOCATION"
+    },
+    {
+      "target": "olist_raw.order_items",
+      "scope": "olist_raw.order_items",
+      "description": "Order line items with order, product, seller, quantity, price, and freight fields.",
+      "aliases": ["order lines", "line items"],
+      "business_terms": ["order item"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ORDER-ITEMS"
+    },
+    {
+      "target": "olist_raw.order_items.price",
+      "scope": "olist_raw.order_items",
+      "description": "Price recorded for an order line. Currency and the business definition of revenue still need team confirmation.",
+      "aliases": ["item price"],
+      "business_terms": ["price"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ITEM-PRICE"
+    },
+    {
+      "target": "olist_raw.order_items.freight_value",
+      "scope": "olist_raw.order_items",
+      "description": "Freight value recorded for an order line. Currency still needs team confirmation.",
+      "aliases": ["freight", "shipping cost"],
+      "business_terms": ["freight"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-FREIGHT"
+    },
+    {
+      "target": "olist_raw.order_payments",
+      "scope": "olist_raw.order_payments",
+      "description": "Payment records associated with orders, including payment type, installments, and payment value.",
+      "aliases": ["payments"],
+      "business_terms": ["payment"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ORDER-PAYMENTS"
+    },
+    {
+      "target": "olist_raw.order_payments.payment_value",
+      "scope": "olist_raw.order_payments",
+      "description": "Payment value recorded for a payment row. Do not assume it means order-item revenue.",
+      "aliases": ["payment amount"],
+      "business_terms": ["payment value"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-PAYMENT-VALUE"
+    },
+    {
+      "target": "olist_raw.order_reviews",
+      "scope": "olist_raw.order_reviews",
+      "description": "Review records associated with orders. review_id alone is not a verified unique key.",
+      "aliases": ["reviews"],
+      "business_terms": ["review"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ORDER-REVIEWS"
+    },
+    {
+      "target": "olist_raw.orders",
+      "scope": "olist_raw.orders",
+      "description": "Order-level records linking customers to order status and order timestamps.",
+      "aliases": ["orders"],
+      "business_terms": ["order"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ORDERS"
+    },
+    {
+      "target": "olist_raw.orders.order_status",
+      "scope": "olist_raw.orders",
+      "description": "Status value recorded for an order. Review the actual values before treating any status as a business rule.",
+      "aliases": ["order status"],
+      "business_terms": ["order status"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-ORDER-STATUS"
+    },
+    {
+      "target": "olist_raw.products",
+      "scope": "olist_raw.products",
+      "description": "Product catalog records with category, descriptive, and physical-attribute fields.",
+      "aliases": ["product"],
+      "business_terms": ["product"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-PRODUCTS"
+    },
+    {
+      "target": "olist_raw.products.product_weight_g",
+      "scope": "olist_raw.products",
+      "description": "Product weight field; the source column name indicates grams.",
+      "aliases": ["product weight"],
+      "business_terms": ["weight"],
+      "unit": "g",
+      "provenance_id": "PROV-META-OLIST-PRODUCT-WEIGHT"
+    },
+    {
+      "target": "olist_raw.products.product_length_cm",
+      "scope": "olist_raw.products",
+      "description": "Product length field; the source column name indicates centimeters.",
+      "aliases": ["product length"],
+      "business_terms": ["length"],
+      "unit": "cm",
+      "provenance_id": "PROV-META-OLIST-PRODUCT-LENGTH"
+    },
+    {
+      "target": "olist_raw.products.product_height_cm",
+      "scope": "olist_raw.products",
+      "description": "Product height field; the source column name indicates centimeters.",
+      "aliases": ["product height"],
+      "business_terms": ["height"],
+      "unit": "cm",
+      "provenance_id": "PROV-META-OLIST-PRODUCT-HEIGHT"
+    },
+    {
+      "target": "olist_raw.products.product_width_cm",
+      "scope": "olist_raw.products",
+      "description": "Product width field; the source column name indicates centimeters.",
+      "aliases": ["product width"],
+      "business_terms": ["width"],
+      "unit": "cm",
+      "provenance_id": "PROV-META-OLIST-PRODUCT-WIDTH"
+    },
+    {
+      "target": "olist_raw.products.product_name_lenght",
+      "scope": "olist_raw.products",
+      "description": "Source product-name length field. Keep the original spelling; the alternate spelling is a search alias only.",
+      "aliases": ["product_name_length", "product name length"],
+      "business_terms": ["product name length"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-PRODUCT-NAME-LENGTH"
+    },
+    {
+      "target": "olist_raw.sellers",
+      "scope": "olist_raw.sellers",
+      "description": "Seller records. seller_id is verified unique and non-null in the DATA-003 model.",
+      "aliases": ["seller"],
+      "business_terms": ["seller"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-SELLERS"
+    },
+    {
+      "target": "olist_raw.product_category_name_translation",
+      "scope": "olist_raw.product_category_name_translation",
+      "description": "Lookup table translating product category names. This is a non-strict lookup, not a guaranteed foreign-key relationship.",
+      "aliases": ["category translation"],
+      "business_terms": ["product category"],
+      "unit": null,
+      "provenance_id": "PROV-META-OLIST-CATEGORY-TRANSLATION"
+    }
+  ]
+}
