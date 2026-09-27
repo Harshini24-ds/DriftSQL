@@ -1,0 +1,39 @@
+{
+  "format_version": 1,
+  "database_id": "olist_primary",
+  "policy_version": "olist-permissions-draft-v1",
+  "source": "postgresql_role_configuration",
+  "status": "DRAFT_FOR_TEAM_REVIEW",
+  "default_access": "DENY",
+  "roles": [
+    {
+      "role_name": "driftsql_olist_reader",
+      "login": false,
+      "table_rules": [
+        {
+          "schema": "olist_raw",
+          "table": "*",
+          "operations": ["SELECT"],
+          "columns": "ALL"
+        }
+      ],
+      "denied_operations": ["INSERT", "UPDATE", "DELETE", "TRUNCATE"]
+    },
+    {
+      "role_name": "driftsql_orders_limited",
+      "login": false,
+      "table_rules": [
+        {
+          "schema": "olist_raw",
+          "table": "orders",
+          "operations": [],
+          "columns": {
+            "allow": ["order_id", "order_status"],
+            "deny": ["customer_id"]
+          }
+        }
+      ],
+      "denied_operations": ["INSERT", "UPDATE", "DELETE", "TRUNCATE"]
+    }
+  ]
+}
