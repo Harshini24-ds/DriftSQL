@@ -65,7 +65,10 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
 
-    adapter = OlistAdapter(dsn=build_dsn())
+    adapter = OlistAdapter(
+        dsn=build_dsn(),
+        database_role="driftsql_olist_reader",
+    )
 
     if not adapter.ping():
         raise RuntimeError(
@@ -95,6 +98,8 @@ def main() -> int:
     print(f"database_id: {snapshot['database_id']}")
     print(f"schema: {snapshot['schema']}")
     print(f"tables: {len(snapshot['tables'])}")
+    print(f"primary_keys: {len(snapshot['primary_keys'])}")
+    print(f"foreign_keys: {len(snapshot['foreign_keys'])}")
     print(f"strict_relationships: {len(snapshot['strict_relationships'])}")
     print(f"non_strict_lookups: {len(snapshot['non_strict_lookups'])}")
     print(f"schema_hash: {snapshot['schema_hash']}")

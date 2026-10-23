@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "database_id": "olist_primary",
+  "schema": "olist_raw",
+  "schema_hash": "57817b896812942795cccea1d33caf89f1ddaa14bf768840408825975a412de1",
+  "profile_version": "olist-values-v1-2026-10-22",
+  "source": "bounded_read_only_value_probe",
+  "access_label": "internal",
+  "status": "APPROVED",
+  "records": [
+    {
+      "target": "olist_raw.orders.order_status",
+      "values": [
+        "approved",
+        "canceled",
+        "created",
+        "delivered",
+        "invoiced",
+        "processing",
+        "shipped",
+        "unavailable"
+      ],
+      "coverage": "COMPLETE",
+      "status": "APPROVED",
+      "provenance_id": "PROV-VALUE-OLIST-ORDERS-STATUS-2026-10-22"
+    }
+  ]
+}

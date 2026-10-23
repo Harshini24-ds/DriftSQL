@@ -122,14 +122,14 @@
         },
         {
           "column_name": "price",
-          "data_type": "numeric",
+          "data_type": "numeric(14,2)",
           "udt_name": "numeric",
           "is_nullable": "YES",
           "ordinal_position": 6
         },
         {
           "column_name": "freight_value",
-          "data_type": "numeric",
+          "data_type": "numeric(14,2)",
           "udt_name": "numeric",
           "is_nullable": "YES",
           "ordinal_position": 7
@@ -169,7 +169,7 @@
         },
         {
           "column_name": "payment_value",
-          "data_type": "numeric",
+          "data_type": "numeric(14,2)",
           "udt_name": "numeric",
           "is_nullable": "YES",
           "ordinal_position": 5
@@ -412,6 +412,8 @@
       ]
     }
   ],
+  "primary_keys": [],
+  "foreign_keys": [],
   "strict_relationships": [
     {
       "child_table": "orders",
@@ -524,6 +526,6 @@
       "unmatched_rows": 7
     }
   ],
-  "schema_hash": "9544788f24808fb3ccfcfb2f798954f9059db40d4f92bfed10fa71d3a9f2f560",
-  "created_at": "2026-09-21T08:39:30.762192+00:00"
+  "schema_hash": "57817b896812942795cccea1d33caf89f1ddaa14bf768840408825975a412de1",
+  "created_at": "2026-10-22T12:26:47.941245+00:00"
 }

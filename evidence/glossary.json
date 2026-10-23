@@ -1,0 +1,44 @@
+{
+  "format_version": 1,
+  "database_id": "olist_primary",
+  "schema": "olist_raw",
+  "schema_hash": "57817b896812942795cccea1d33caf89f1ddaa14bf768840408825975a412de1",
+  "glossary_version": "olist-glossary-v1",
+  "source": "team_curated_glossary",
+  "access_label": "internal",
+  "records": [
+    {
+      "term": "order",
+      "definition": "An order-level record identified by order_id in olist_raw.orders. The team must review which statuses count for any business metric.",
+      "target": "olist_raw.orders",
+      "aliases": ["orders"],
+      "definition_version": "draft-v1",
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
+      "effective_to": null,
+      "provenance_id": "PROV-GLOSSARY-OLIST-ORDER"
+    },
+    {
+      "term": "order item",
+      "definition": "An order line identified by the pair (order_id, order_item_id) in olist_raw.order_items. It is not interchangeable with an order-level record.",
+      "target": "olist_raw.order_items",
+      "aliases": ["line item", "order line"],
+      "definition_version": "draft-v1",
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
+      "effective_to": null,
+      "provenance_id": "PROV-GLOSSARY-OLIST-ORDER-ITEM"
+    },
+    {
+      "term": "payment value",
+      "definition": "The value recorded on an olist_raw.order_payments payment row. It is not, without an approved rule, a definition of revenue.",
+      "target": "olist_raw.order_payments.payment_value",
+      "aliases": ["payment amount"],
+      "definition_version": "draft-v1",
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
+      "effective_to": null,
+      "provenance_id": "PROV-GLOSSARY-OLIST-PAYMENT-VALUE"
+    }
+  ]
+}

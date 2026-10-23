@@ -52,8 +52,10 @@ def dsn() -> str:
 @pytest.fixture(scope="module")
 def adapter(dsn: str) -> OlistAdapter:
     """Create the Olist adapter for the local verified PostgreSQL database."""
-    return OlistAdapter(dsn=dsn)
-
+    return OlistAdapter(
+    dsn=dsn,
+    database_role="driftsql_olist_reader",
+)
 
 def test_registry_contains_olist_primary() -> None:
     """The default registry must expose the frozen Olist database_id."""
@@ -62,8 +64,11 @@ def test_registry_contains_olist_primary() -> None:
 
 def test_registry_creates_olist_adapter(dsn: str) -> None:
     """The registry should resolve olist_primary to an OlistAdapter."""
-    resolved = DEFAULT_REGISTRY.create("olist_primary", dsn=dsn)
-
+    resolved = DEFAULT_REGISTRY.create(
+    "olist_primary",
+    dsn=dsn,
+    database_role="driftsql_olist_reader",
+)
     assert isinstance(resolved, OlistAdapter)
     assert resolved.database_id == "olist_primary"
 

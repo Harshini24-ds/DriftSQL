@@ -1,0 +1,213 @@
+{
+  "dataset_id": "driftsql_month2_gold_rq",
+  "database_id": "olist_primary",
+  "annotation_version": "v1",
+  "annotation_status": "APPROVED",
+  "runtime_use": false,
+  "cases": [
+    {
+      "question_id": "M2-Q01",
+      "question": "How many customer records are in the dataset?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q01-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.customers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the customer table exists."},
+        {"gold_obligation_id": "M2-Q01-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.customers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the customer table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q02",
+      "question": "How many geolocation records are stored?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q02-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.geolocation", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the geolocation table exists."},
+        {"gold_obligation_id": "M2-Q02-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.geolocation", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the geolocation table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q03",
+      "question": "How many order line items are recorded?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q03-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order-items table exists."},
+        {"gold_obligation_id": "M2-Q03-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the order-items table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q04",
+      "question": "How many payment records are in the dataset?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q04-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_payments", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order-payments table exists."},
+        {"gold_obligation_id": "M2-Q04-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_payments", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the order-payments table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q05",
+      "question": "How many review records exist?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q05-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order-reviews table exists."},
+        {"gold_obligation_id": "M2-Q05-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the order-reviews table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q06",
+      "question": "How many orders are recorded?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q06-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the orders table exists."},
+        {"gold_obligation_id": "M2-Q06-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the orders table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q07",
+      "question": "How many product-category translation entries exist?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q07-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.product_category_name_translation", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the category-translation table exists."},
+        {"gold_obligation_id": "M2-Q07-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.product_category_name_translation", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the category-translation table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q08",
+      "question": "How many products are in the catalog?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q08-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.products", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the products table exists."},
+        {"gold_obligation_id": "M2-Q08-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.products", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the products table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q09",
+      "question": "How many sellers are recorded?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q09-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.sellers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the sellers table exists."},
+        {"gold_obligation_id": "M2-Q09-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.sellers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the sellers table."}
+      ]
+    },
+    {
+      "question_id": "M2-Q10",
+      "question": "How many orders have delivered status?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q10-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the orders table exists."},
+        {"gold_obligation_id": "M2-Q10-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read order status."},
+        {"gold_obligation_id": "M2-Q10-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders.order_status", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm order_status is a field in the orders table."},
+        {"gold_obligation_id": "M2-Q10-04", "evidence_type": "VALUE", "canonical_target_id": "olist_raw.orders.order_status", "constraint_type": "filter_value_exists", "mandatory": true, "expected_source_types": ["bounded_read_only_value_probe", "approved_value_profile"], "reason": "Confirm the requested delivered value is present; do not infer its business meaning."},
+        {"gold_obligation_id": "M2-Q10-05", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders.order_status", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the status field used by the filter."}
+      ]
+    },
+    {
+      "question_id": "M2-Q11",
+      "question": "How many customers are in each state?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q11-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.customers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the customers table exists."},
+        {"gold_obligation_id": "M2-Q11-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.customers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read customer records."},
+        {"gold_obligation_id": "M2-Q11-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.customers.customer_state", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm customer_state is a field in the customers table."},
+        {"gold_obligation_id": "M2-Q11-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.customers.customer_state", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the state field used for grouping."}
+      ]
+    },
+    {
+      "question_id": "M2-Q12",
+      "question": "How many sellers are in each state?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q12-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.sellers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the sellers table exists."},
+        {"gold_obligation_id": "M2-Q12-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.sellers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read seller records."},
+        {"gold_obligation_id": "M2-Q12-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.sellers.seller_state", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm seller_state is a field in the sellers table."},
+        {"gold_obligation_id": "M2-Q12-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.sellers.seller_state", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the state field used for grouping."}
+      ]
+    },
+    {
+      "question_id": "M2-Q13",
+      "question": "How many payments use each payment type?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q13-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_payments", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_payments table exists."},
+        {"gold_obligation_id": "M2-Q13-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_payments", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read payment records."},
+        {"gold_obligation_id": "M2-Q13-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_payments.payment_type", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm payment_type is a field in the order_payments table."},
+        {"gold_obligation_id": "M2-Q13-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_payments.payment_type", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the payment-type field used for grouping."}
+      ]
+    },
+    {
+      "question_id": "M2-Q14",
+      "question": "How many reviews have each review score?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q14-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_reviews table exists."},
+        {"gold_obligation_id": "M2-Q14-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read review records."},
+        {"gold_obligation_id": "M2-Q14-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_reviews.review_score", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm review_score is a field in the order_reviews table."},
+        {"gold_obligation_id": "M2-Q14-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_reviews.review_score", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the score field used for grouping."}
+      ]
+    },
+    {
+      "question_id": "M2-Q15",
+      "question": "What is the average order-item price?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q15-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_items table exists."},
+        {"gold_obligation_id": "M2-Q15-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read order-item records."},
+        {"gold_obligation_id": "M2-Q15-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items.price", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm price is a field in the order_items table."},
+        {"gold_obligation_id": "M2-Q15-04", "evidence_type": "METADATA", "canonical_target_id": "olist_raw.order_items.price", "constraint_type": "field_description", "mandatory": true, "expected_source_types": ["approved_metadata_catalog"], "reason": "Confirm the field meaning and any unit caveats; do not equate price with revenue."},
+        {"gold_obligation_id": "M2-Q15-05", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items.price", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read price for the average calculation."}
+      ]
+    },
+    {
+      "question_id": "M2-Q16",
+      "question": "What is the total freight value on order items?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q16-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_items table exists."},
+        {"gold_obligation_id": "M2-Q16-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read order-item records."},
+        {"gold_obligation_id": "M2-Q16-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items.freight_value", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm freight_value is a field in the order_items table."},
+        {"gold_obligation_id": "M2-Q16-04", "evidence_type": "METADATA", "canonical_target_id": "olist_raw.order_items.freight_value", "constraint_type": "field_description", "mandatory": true, "expected_source_types": ["approved_metadata_catalog"], "reason": "Confirm the field description and preserve the unresolved currency caveat."},
+        {"gold_obligation_id": "M2-Q16-05", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items.freight_value", "constraint_type": "role_allows_column_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read freight_value for the total calculation."}
+      ]
+    },
+    {
+      "question_id": "M2-Q17",
+      "question": "How many orders are there for each customer?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q17-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the orders table exists."},
+        {"gold_obligation_id": "M2-Q17-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read orders."},
+        {"gold_obligation_id": "M2-Q17-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.customers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the customers table exists."},
+        {"gold_obligation_id": "M2-Q17-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.customers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read customer records."},
+        {"gold_obligation_id": "M2-Q17-05", "evidence_type": "RELATIONSHIP", "canonical_target_id": "olist_raw.orders -> olist_raw.customers", "constraint_type": "join_relationship", "mandatory": true, "expected_source_types": ["live_pk_fk_catalog", "approved_relationship_evidence"], "reason": "Verify the orders-to-customers join path."},
+        {"gold_obligation_id": "M2-Q17-06", "evidence_type": "DOCUMENT", "canonical_target_id": "olist_raw", "constraint_type": "applicable_dataset_rules", "mandatory": true, "expected_source_types": ["approved_documentation"], "reason": "Check applicable documented join rules."},
+        {"gold_obligation_id": "M2-Q17-07", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders.customer_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the orders-side join key."},
+        {"gold_obligation_id": "M2-Q17-08", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.customers.customer_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the customers-side join key."},
+        {"gold_obligation_id": "M2-Q17-09", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.customers.customer_id", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the customer identifier used for grouping exists."}
+      ]
+    },
+    {
+      "question_id": "M2-Q18",
+      "question": "How many order items are supplied by each seller?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q18-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_items", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_items table exists."},
+        {"gold_obligation_id": "M2-Q18-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read order items."},
+        {"gold_obligation_id": "M2-Q18-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.sellers", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the sellers table exists."},
+        {"gold_obligation_id": "M2-Q18-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.sellers", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read sellers."},
+        {"gold_obligation_id": "M2-Q18-05", "evidence_type": "RELATIONSHIP", "canonical_target_id": "olist_raw.order_items -> olist_raw.sellers", "constraint_type": "join_relationship", "mandatory": true, "expected_source_types": ["live_pk_fk_catalog", "approved_relationship_evidence"], "reason": "Verify the order_items-to-sellers join path."},
+        {"gold_obligation_id": "M2-Q18-06", "evidence_type": "DOCUMENT", "canonical_target_id": "olist_raw", "constraint_type": "applicable_dataset_rules", "mandatory": true, "expected_source_types": ["approved_documentation"], "reason": "Check applicable documented join rules."},
+        {"gold_obligation_id": "M2-Q18-07", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_items.seller_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the order-items-side join key."},
+        {"gold_obligation_id": "M2-Q18-08", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.sellers.seller_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the sellers-side join key."},
+        {"gold_obligation_id": "M2-Q18-09", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.sellers.seller_id", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the seller identifier used for grouping exists."}
+      ]
+    },
+    {
+      "question_id": "M2-Q19",
+      "question": "How many products have a category translation?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q19-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.products", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the products table exists."},
+        {"gold_obligation_id": "M2-Q19-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.products", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read products."},
+        {"gold_obligation_id": "M2-Q19-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.product_category_name_translation", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the translation table exists."},
+        {"gold_obligation_id": "M2-Q19-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.product_category_name_translation", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read translations."},
+        {"gold_obligation_id": "M2-Q19-05", "evidence_type": "RELATIONSHIP", "canonical_target_id": "olist_raw.products -> olist_raw.product_category_name_translation", "constraint_type": "non_strict_lookup_relationship", "mandatory": true, "expected_source_types": ["live_pk_fk_catalog", "approved_relationship_evidence"], "reason": "Verify the lookup relationship without assuming complete translation coverage."},
+        {"gold_obligation_id": "M2-Q19-06", "evidence_type": "DOCUMENT", "canonical_target_id": "olist_raw", "constraint_type": "lookup_coverage_rule", "mandatory": true, "expected_source_types": ["approved_documentation"], "reason": "Preserve the documented incomplete-coverage caveat."},
+        {"gold_obligation_id": "M2-Q19-07", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.products.product_category_name", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the products-side lookup key."},
+        {"gold_obligation_id": "M2-Q19-08", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.product_category_name_translation.product_category_name", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the translation-side lookup key."}
+      ]
+    },
+    {
+      "question_id": "M2-Q20",
+      "question": "How many reviews are associated with each order?",
+      "gold_obligations": [
+        {"gold_obligation_id": "M2-Q20-01", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order_reviews table exists."},
+        {"gold_obligation_id": "M2-Q20-02", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_reviews", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read reviews."},
+        {"gold_obligation_id": "M2-Q20-03", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders", "constraint_type": "entity_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the orders table exists."},
+        {"gold_obligation_id": "M2-Q20-04", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders", "constraint_type": "role_allows_access", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read orders."},
+        {"gold_obligation_id": "M2-Q20-05", "evidence_type": "RELATIONSHIP", "canonical_target_id": "olist_raw.order_reviews -> olist_raw.orders", "constraint_type": "join_relationship", "mandatory": true, "expected_source_types": ["live_pk_fk_catalog", "approved_relationship_evidence"], "reason": "Verify the order_reviews-to-orders join path."},
+        {"gold_obligation_id": "M2-Q20-06", "evidence_type": "DOCUMENT", "canonical_target_id": "olist_raw", "constraint_type": "applicable_dataset_rules", "mandatory": true, "expected_source_types": ["approved_documentation"], "reason": "Check applicable documented join rules."},
+        {"gold_obligation_id": "M2-Q20-07", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.order_reviews.order_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the reviews-side join key."},
+        {"gold_obligation_id": "M2-Q20-08", "evidence_type": "PERMISSION", "canonical_target_id": "olist_raw.orders.order_id", "constraint_type": "role_allows_join_key_read", "mandatory": true, "expected_source_types": ["active_postgresql_role"], "reason": "Confirm the active role may read the orders-side join key."},
+        {"gold_obligation_id": "M2-Q20-09", "evidence_type": "SCHEMA", "canonical_target_id": "olist_raw.orders.order_id", "constraint_type": "field_exists", "mandatory": true, "expected_source_types": ["active_postgresql_catalog", "current_schema_snapshot"], "reason": "Confirm the order identifier used for grouping exists."}
+      ]
+    }
+  ]
+}

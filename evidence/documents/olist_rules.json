@@ -1,0 +1,23 @@
+{
+  "format_version": 1,
+  "database_id": "olist_primary",
+  "documents_version": "olist-documents-v1",
+  "source": "docs/data_model.md",
+  "access_label": "internal",
+  "status": "APPROVED",
+  "records": [
+    {
+      "document_id": "DOC-OLIST-JOIN-POLICY",
+      "title": "Olist join-path policy",
+      "rule": "Use only the six verified strict relationships as authoritative join paths. Category translation and geolocation links are non-strict lookups and must not be treated as guaranteed foreign-key relationships.",
+      "scope": "olist_raw",
+      "source_id": "docs/data_model.md#join-reasoning-policy",
+      "document_version": "v1",
+      "authority_level": 60,
+      "effective_from": "2026-10-19T00:00:00Z",
+      "effective_to": null,
+      "status": "APPROVED",
+      "provenance_id": "PROV-DOC-OLIST-JOIN-POLICY"
+    }
+  ]
+}

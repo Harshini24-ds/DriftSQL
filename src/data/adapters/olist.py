@@ -20,9 +20,10 @@ import hashlib
 import json
 import re
 from datetime import datetime, timezone
-from typing import Any, Mapping, Sequence
+from typing import Any, Literal, Mapping, Sequence
 
 import psycopg
+from psycopg import sql
 from psycopg.rows import dict_row
 
 from .base import DatabaseAdapter
@@ -33,6 +34,10 @@ class OlistAdapter(DatabaseAdapter):
 
     DATABASE_ID = "olist_primary"
     DEFAULT_SCHEMA = "olist_raw"
+    SUPPORTED_ROLES = frozenset({
+        "driftsql_olist_reader",
+        "driftsql_orders_limited",
+    })
 
     # Verified in DATA-003: each relationship produced 0 orphan child rows.
     _STRICT_RELATIONSHIPS: tuple[dict[str, Any], ...] = (
@@ -121,10 +126,13 @@ class OlistAdapter(DatabaseAdapter):
         r")\b",
         re.IGNORECASE,
     )
-
     def __init__(
         self,
         dsn: str,
+        database_role: Literal[
+            "driftsql_olist_reader",
+            "driftsql_orders_limited",
+        ],
         *,
         schema: str = DEFAULT_SCHEMA,
         default_timeout_ms: int = 5_000,
@@ -132,26 +140,74 @@ class OlistAdapter(DatabaseAdapter):
     ) -> None:
         if not dsn or not dsn.strip():
             raise ValueError("A PostgreSQL DSN is required.")
-
+        if database_role not in self.SUPPORTED_ROLES:
+            raise ValueError("Unsupported PostgreSQL role.")
         if default_timeout_ms <= 0:
             raise ValueError("default_timeout_ms must be greater than 0.")
-
         if default_row_limit <= 0:
             raise ValueError("default_row_limit must be greater than 0.")
 
         self._dsn = dsn
+        self.database_role = database_role
         self.schema = schema
         self.default_timeout_ms = default_timeout_ms
         self.default_row_limit = default_row_limit
-
     @property
     def database_id(self) -> str:
         """Stable DriftSQL identifier for the primary Olist database."""
         return self.DATABASE_ID
 
-    def _connect(self) -> psycopg.Connection:
-        """Open a PostgreSQL connection returning rows as dictionaries."""
-        return psycopg.connect(self._dsn, row_factory=dict_row)
+    def _connect(self, *, read_only: bool = False) -> psycopg.Connection:
+        """Open a connection using this adapter's server-configured role."""
+        conn = psycopg.connect(self._dsn, row_factory=dict_row)
+        try:
+            if read_only:
+                conn.execute("SET TRANSACTION READ ONLY")
+
+            conn.execute(
+                sql.SQL("SET LOCAL ROLE {}").format(
+                    sql.Identifier(self.database_role)
+                )
+            )
+        except Exception:
+            conn.close()
+            raise
+        return conn
+    def can_select(
+        self,
+        table: str,
+        column: str | None = None,
+    ) -> bool:
+        """Check SELECT permission using this adapter's configured role."""
+        parts = table.split(".", maxsplit=1)
+        if len(parts) != 2 or parts[0] != self.schema or not parts[1]:
+            raise ValueError(
+                f"Table must be qualified with the configured schema "
+                f"{self.schema!r}."
+            )
+
+        if column is not None and not column.strip():
+            raise ValueError("column cannot be empty.")
+
+        if column is None:
+            query = """
+                SELECT has_table_privilege(
+                    current_user, %s, 'SELECT'
+                ) AS allowed
+            """
+            params = (table,)
+        else:
+            query = """
+                SELECT has_column_privilege(
+                    current_user, %s, %s, 'SELECT'
+                ) AS allowed
+            """
+            params = (table, column)
+
+        with self._connect(read_only=True) as conn:
+            row = conn.execute(query, params).fetchone()
+
+        return bool(row and row["allowed"])
 
     def ping(self) -> bool:
         """Check that PostgreSQL is reachable without changing any data."""
@@ -163,13 +219,15 @@ class OlistAdapter(DatabaseAdapter):
             return False
 
     def get_tables(self) -> list[str]:
-        """Read the active Olist table list from PostgreSQL information_schema."""
+        """Read all ordinary and partitioned tables from PostgreSQL's catalog."""
         query = """
-            SELECT table_name
-            FROM information_schema.tables
-            WHERE table_schema = %s
-              AND table_type = 'BASE TABLE'
-            ORDER BY table_name
+            SELECT relation.relname AS table_name
+            FROM pg_catalog.pg_class AS relation
+            JOIN pg_catalog.pg_namespace AS namespace
+              ON namespace.oid = relation.relnamespace
+            WHERE namespace.nspname = %s
+              AND relation.relkind IN ('r', 'p')
+            ORDER BY relation.relname
         """
 
         with self._connect() as conn:
@@ -178,18 +236,31 @@ class OlistAdapter(DatabaseAdapter):
         return [row["table_name"] for row in rows]
 
     def get_columns(self, table_name: str) -> list[dict[str, Any]]:
-        """Read column facts for one table from the live PostgreSQL catalog."""
+        """Read all column facts, independent of the active role's SELECT grants."""
         query = """
             SELECT
-                column_name,
-                data_type,
-                udt_name,
-                is_nullable,
-                ordinal_position
-            FROM information_schema.columns
-            WHERE table_schema = %s
-              AND table_name = %s
-            ORDER BY ordinal_position
+                attribute.attname AS column_name,
+                pg_catalog.format_type(
+                    attribute.atttypid,
+                    attribute.atttypmod
+                ) AS data_type,
+                data_type.typname AS udt_name,
+                CASE WHEN attribute.attnotnull THEN 'NO' ELSE 'YES' END
+                    AS is_nullable,
+                attribute.attnum AS ordinal_position
+            FROM pg_catalog.pg_attribute AS attribute
+            JOIN pg_catalog.pg_class AS relation
+              ON relation.oid = attribute.attrelid
+            JOIN pg_catalog.pg_namespace AS namespace
+              ON namespace.oid = relation.relnamespace
+            JOIN pg_catalog.pg_type AS data_type
+              ON data_type.oid = attribute.atttypid
+            WHERE namespace.nspname = %s
+              AND relation.relname = %s
+              AND relation.relkind IN ('r', 'p')
+              AND attribute.attnum > 0
+              AND NOT attribute.attisdropped
+            ORDER BY attribute.attnum
         """
 
         with self._connect() as conn:
@@ -199,6 +270,85 @@ class OlistAdapter(DatabaseAdapter):
             raise KeyError(
                 f"Table {self.schema}.{table_name!s} was not found in the live catalog."
             )
+
+        return [dict(row) for row in rows]
+
+    def get_primary_keys(self) -> list[dict[str, Any]]:
+        """Read normalized live primary-key columns from PostgreSQL catalogs."""
+        query = """
+            SELECT
+                relation.relname AS table_name,
+                array_agg(attribute.attname ORDER BY key_column.ordinality)
+                    AS columns
+            FROM pg_catalog.pg_constraint AS constraint_record
+            JOIN pg_catalog.pg_class AS relation
+              ON relation.oid = constraint_record.conrelid
+            JOIN pg_catalog.pg_namespace AS namespace
+              ON namespace.oid = relation.relnamespace
+            JOIN LATERAL unnest(constraint_record.conkey)
+                WITH ORDINALITY AS key_column(attnum, ordinality)
+              ON TRUE
+            JOIN pg_catalog.pg_attribute AS attribute
+              ON attribute.attrelid = relation.oid
+             AND attribute.attnum = key_column.attnum
+            WHERE namespace.nspname = %s
+              AND constraint_record.contype = 'p'
+            GROUP BY relation.relname, constraint_record.oid
+            ORDER BY relation.relname, columns
+        """
+
+        with self._connect(read_only=True) as conn:
+            rows = conn.execute(query, (self.schema,)).fetchall()
+
+        return [dict(row) for row in rows]
+
+    def get_foreign_keys(self) -> list[dict[str, Any]]:
+        """Read normalized live foreign-key columns and validation state."""
+        query = """
+            SELECT
+                source_relation.relname AS child_table,
+                array_agg(source_attribute.attname ORDER BY key_pair.ordinality)
+                    AS child_columns,
+                target_namespace.nspname AS parent_schema,
+                target_relation.relname AS parent_table,
+                array_agg(target_attribute.attname ORDER BY key_pair.ordinality)
+                    AS parent_columns,
+                constraint_record.convalidated AS validated
+            FROM pg_catalog.pg_constraint AS constraint_record
+            JOIN pg_catalog.pg_class AS source_relation
+              ON source_relation.oid = constraint_record.conrelid
+            JOIN pg_catalog.pg_namespace AS source_namespace
+              ON source_namespace.oid = source_relation.relnamespace
+            JOIN pg_catalog.pg_class AS target_relation
+              ON target_relation.oid = constraint_record.confrelid
+            JOIN pg_catalog.pg_namespace AS target_namespace
+              ON target_namespace.oid = target_relation.relnamespace
+            JOIN LATERAL unnest(
+                constraint_record.conkey,
+                constraint_record.confkey
+            ) WITH ORDINALITY AS key_pair(child_attnum, parent_attnum, ordinality)
+              ON TRUE
+            JOIN pg_catalog.pg_attribute AS source_attribute
+              ON source_attribute.attrelid = source_relation.oid
+             AND source_attribute.attnum = key_pair.child_attnum
+            JOIN pg_catalog.pg_attribute AS target_attribute
+              ON target_attribute.attrelid = target_relation.oid
+             AND target_attribute.attnum = key_pair.parent_attnum
+            WHERE source_namespace.nspname = %s
+              AND constraint_record.contype = 'f'
+            GROUP BY
+                source_relation.relname,
+                target_namespace.nspname,
+                target_relation.relname,
+                constraint_record.convalidated,
+                constraint_record.oid
+            ORDER BY source_relation.relname, child_columns,
+                     target_namespace.nspname, target_relation.relname,
+                     parent_columns
+        """
+
+        with self._connect(read_only=True) as conn:
+            rows = conn.execute(query, (self.schema,)).fetchall()
 
         return [dict(row) for row in rows]
 
@@ -228,6 +378,8 @@ class OlistAdapter(DatabaseAdapter):
                 }
                 for table_name in tables
             ],
+            "primary_keys": self.get_primary_keys(),
+            "foreign_keys": self.get_foreign_keys(),
             "strict_relationships": self.get_relationships(),
             "non_strict_lookups": self.get_lookup_relationships(),
         }
@@ -292,9 +444,9 @@ class OlistAdapter(DatabaseAdapter):
         if effective_limit <= 0:
             raise ValueError("row_limit must be greater than 0.")
 
-        with self._connect() as conn:
-            # PostgreSQL itself enforces that this transaction cannot write.
-            conn.execute("SET TRANSACTION READ ONLY")
+
+        with self._connect(read_only=True) as conn:
+            # PostgreSQL enforces the read-only transaction and configured role.
 
             # Apply the timeout only to this transaction.
             conn.execute(
