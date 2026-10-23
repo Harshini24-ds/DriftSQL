@@ -3,7 +3,7 @@
   "database_id": "olist_primary",
   "policy_version": "olist-permissions-draft-v1",
   "source": "postgresql_role_configuration",
-  "status": "DRAFT_FOR_TEAM_REVIEW",
+  "status": "APPROVED",
   "default_access": "DENY",
   "roles": [
     {

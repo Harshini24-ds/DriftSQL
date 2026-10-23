@@ -2,8 +2,8 @@
   "format_version": 1,
   "database_id": "olist_primary",
   "schema": "olist_raw",
-  "schema_hash": "9544788f24808fb3ccfcfb2f798954f9059db40d4f92bfed10fa71d3a9f2f560",
-  "glossary_version": "olist-glossary-draft-v1",
+  "schema_hash": "57817b896812942795cccea1d33caf89f1ddaa14bf768840408825975a412de1",
+  "glossary_version": "olist-glossary-v1",
   "source": "team_curated_glossary",
   "access_label": "internal",
   "records": [
@@ -13,8 +13,8 @@
       "target": "olist_raw.orders",
       "aliases": ["orders"],
       "definition_version": "draft-v1",
-      "status": "DRAFT_FOR_TEAM_REVIEW",
-      "effective_from": null,
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
       "effective_to": null,
       "provenance_id": "PROV-GLOSSARY-OLIST-ORDER"
     },
@@ -24,8 +24,8 @@
       "target": "olist_raw.order_items",
       "aliases": ["line item", "order line"],
       "definition_version": "draft-v1",
-      "status": "DRAFT_FOR_TEAM_REVIEW",
-      "effective_from": null,
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
       "effective_to": null,
       "provenance_id": "PROV-GLOSSARY-OLIST-ORDER-ITEM"
     },
@@ -35,8 +35,8 @@
       "target": "olist_raw.order_payments.payment_value",
       "aliases": ["payment amount"],
       "definition_version": "draft-v1",
-      "status": "DRAFT_FOR_TEAM_REVIEW",
-      "effective_from": null,
+      "status": "APPROVED",
+      "effective_from": "2026-10-22",
       "effective_to": null,
       "provenance_id": "PROV-GLOSSARY-OLIST-PAYMENT-VALUE"
     }

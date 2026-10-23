@@ -2,9 +2,9 @@
   "format_version": 1,
   "database_id": "olist_primary",
   "schema": "olist_raw",
-  "schema_hash": "9544788f24808fb3ccfcfb2f798954f9059db40d4f92bfed10fa71d3a9f2f560",
-  "metadata_version": "olist-metadata-draft-v1",
-  "status": "DRAFT_FOR_TEAM_REVIEW",
+  "schema_hash": "57817b896812942795cccea1d33caf89f1ddaa14bf768840408825975a412de1",
+  "metadata_version": "olist-metadata-v1",
+  "status": "APPROVED",
   "source": "team_curated_metadata",
   "access_label": "internal",
   "records": [
@@ -166,7 +166,7 @@
       "scope": "olist_raw.product_category_name_translation",
       "description": "Lookup table translating product category names. This is a non-strict lookup, not a guaranteed foreign-key relationship.",
       "aliases": ["category translation"],
-      "business_terms": ["product category"],
+      "business_terms": ["product category translation"],
       "unit": null,
       "provenance_id": "PROV-META-OLIST-CATEGORY-TRANSLATION"
     }
