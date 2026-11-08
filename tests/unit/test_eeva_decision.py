@@ -97,11 +97,13 @@ def make_case(*, optional=False):
                 "database_role": ROLE,
                 "decision": "ALLOW",
             }
+
         elif obligation.evidence_type == EvidenceType.SCHEMA:
             value = {
                 "target": obligation.target,
                 "kind": "table",
             }
+
         else:
             value = {
                 "target": obligation.target,
@@ -113,6 +115,7 @@ def make_case(*, optional=False):
             if obligation.evidence_type == EvidenceType.SCHEMA
             else "source-v1"
         )
+
         digest = content_hash(value)
         provenance_id = f"PROV-{index}"
 
@@ -161,7 +164,9 @@ def make_case(*, optional=False):
         database_id="test_database",
         evidence_items=tuple(items),
         schema_hash="schema-v1",
-        retrieval_metadata={"diagnostic_note": "not generator context"},
+        retrieval_metadata={
+            "diagnostic_note": "not generator context",
+        },
         freshness_policy_version="freshness-v1",
         created_at=NOW,
     )
@@ -190,7 +195,7 @@ def make_case(*, optional=False):
 
 
 def make_reviews(analysis, snapshot, overrides=None):
-    """Simulate conflict-detector output for the simple fixtures."""
+    """Simulate conflict-detector output for controlled fixtures."""
     overrides = {} if overrides is None else overrides
     digest = snapshot_fingerprint(snapshot)
 
@@ -300,7 +305,9 @@ def test_hard_failures_reject_without_bundle(
 
     if failure == "permission":
         context = context.model_copy(
-            update={"permission_decisions": {"test.orders": False}}
+            update={
+                "permission_decisions": {"test.orders": False},
+            }
         )
 
     elif failure == "missing":
@@ -313,6 +320,7 @@ def test_hard_failures_reject_without_bundle(
                 )
             }
         )
+
         context = context.model_copy(
             update={"available_recovery_actions": frozenset()}
         )
@@ -330,14 +338,13 @@ def test_hard_failures_reject_without_bundle(
                 )
             }
         )
+
         context = context.model_copy(
             update={"available_recovery_actions": frozenset()}
         )
 
     else:
-        overrides[requirement_id] = (
-            EvidenceState.CONFLICT_CRITICAL
-        )
+        overrides[requirement_id] = EvidenceState.CONFLICT_CRITICAL
 
     result = evaluate_case(
         analysis,
@@ -381,6 +388,7 @@ def test_missing_recoverable_evidence_clarifies():
     assert result.hard_failures == ()
     assert requirement_id in result.missing_items
     assert result.validated_evidence_bundle is None
+
     assert [
         (hint.requirement_id, hint.action)
         for hint in result.recovery_actions
@@ -391,6 +399,7 @@ def test_missing_recoverable_evidence_clarifies():
 
 def test_stale_schema_clarifies_instead_of_generating():
     analysis, snapshot, context = make_case()
+
     context = context.model_copy(
         update={"schema_hash": "new-live-schema"}
     )
@@ -426,6 +435,7 @@ def test_recoverable_conflict_clarifies():
 
 def test_unresolved_intent_clarifies_even_when_evidence_passes():
     analysis, snapshot, context = make_case()
+
     analysis = analysis.model_copy(
         update={
             "intent": analysis.intent.model_copy(
@@ -445,6 +455,7 @@ def test_unresolved_intent_clarifies_even_when_evidence_passes():
 
 def test_hard_failure_takes_precedence_over_unresolved_intent():
     analysis, snapshot, context = make_case()
+
     analysis = analysis.model_copy(
         update={
             "intent": analysis.intent.model_copy(
@@ -452,8 +463,11 @@ def test_hard_failure_takes_precedence_over_unresolved_intent():
             )
         }
     )
+
     context = context.model_copy(
-        update={"permission_decisions": {"test.orders": False}}
+        update={
+            "permission_decisions": {"test.orders": False},
+        }
     )
 
     result = evaluate_case(analysis, snapshot, context)
@@ -466,6 +480,7 @@ def test_hard_failure_takes_precedence_over_unresolved_intent():
 
 def test_optional_success_cannot_compensate_for_permission_denial():
     analysis, snapshot, context = make_case(optional=True)
+
     context = context.model_copy(
         update={
             "permission_decisions": {
@@ -485,6 +500,7 @@ def test_optional_success_cannot_compensate_for_permission_denial():
 
 def test_missing_optional_evidence_without_recovery_does_not_block():
     analysis, snapshot, context = make_case(optional=True)
+
     snapshot = snapshot.model_copy(
         update={
             "evidence_items": tuple(
@@ -506,7 +522,10 @@ def test_missing_optional_evidence_without_recovery_does_not_block():
 
 def test_bundle_excludes_retrieval_diagnostics():
     result = evaluate_case(*make_case())
-    approved = result.validated_evidence_bundle.evidence_snapshot()
+
+    approved = (
+        result.validated_evidence_bundle.evidence_snapshot()
+    )
 
     assert approved.retrieval_metadata == {}
 
@@ -519,6 +538,7 @@ def test_bundle_survives_later_input_mutation():
     snapshot.evidence_items[0].value["target"] = "tampered.table"
 
     approved = bundle.evidence_snapshot()
+
     assert approved.evidence_items[0].value["target"] == "test.orders"
 
 
@@ -530,6 +550,7 @@ def test_mutating_returned_view_does_not_change_frozen_bundle():
     first_view.evidence_items[0].value["target"] = "tampered.table"
 
     second_view = bundle.evidence_snapshot()
+
     assert second_view.evidence_items[0].value["target"] == "test.orders"
 
 
@@ -557,7 +578,11 @@ def test_bundle_identity_is_bound_to_principal():
         }
     )
 
-    second = evaluate_case(changed_analysis, snapshot, context)
+    second = evaluate_case(
+        changed_analysis,
+        snapshot,
+        context,
+    )
 
     assert (
         first.validated_evidence_bundle_id
@@ -592,8 +617,11 @@ def test_missing_conflict_scan_rejects_generation():
 
 def test_unsupported_operation_must_stop_at_qim_precheck():
     analysis, snapshot, context = make_case()
+
     unsupported = analyze_query_intent(
-        analysis.intent.model_copy(update={"operation": "delete"}),
+        analysis.intent.model_copy(
+            update={"operation": "delete"}
+        ),
         access_context=analysis.access_context,
     )
 
@@ -608,6 +636,7 @@ def test_unsupported_operation_must_stop_at_qim_precheck():
 
 def test_missing_access_context_is_rejected():
     analysis, snapshot, context = make_case()
+
     analysis = analysis.model_copy(
         update={"access_context": None}
     )
@@ -623,6 +652,7 @@ def test_missing_access_context_is_rejected():
 
 def test_active_role_mismatch_is_rejected():
     analysis, snapshot, context = make_case()
+
     context = context.model_copy(
         update={"database_role": "driftsql_orders_limited"}
     )
@@ -638,6 +668,7 @@ def test_active_role_mismatch_is_rejected():
 
 def test_empty_obligation_set_cannot_approve_generation():
     analysis, snapshot, context = make_case()
+
     analysis = analysis.model_copy(
         update={"required_evidence_obligations": ()}
     )
@@ -653,6 +684,7 @@ def test_empty_obligation_set_cannot_approve_generation():
 
 def test_wrong_request_snapshot_is_rejected():
     analysis, snapshot, context = make_case()
+
     snapshot = snapshot.model_copy(
         update={"request_id": "different-request"}
     )
@@ -664,3 +696,106 @@ def test_wrong_request_snapshot_is_rejected():
             context,
             conflict_assessments=(),
         )
+
+
+def test_denied_optional_evidence_is_excluded_without_rejecting():
+    analysis, snapshot, context = make_case(optional=True)
+
+    context = context.model_copy(
+        update={
+            "permission_decisions": {
+                "test.orders": True,
+                "test.notes": False,
+            }
+        }
+    )
+
+    result = evaluate_case(analysis, snapshot, context)
+
+    optional_requirement = next(
+        obligation
+        for obligation in analysis.required_evidence_obligations
+        if not obligation.mandatory
+    )
+
+    optional_state = next(
+        state
+        for state in result.evidence_states
+        if state.requirement_id
+        == optional_requirement.requirement_id
+    )
+
+    assert result.decision == Decision.GENERATE
+    assert result.hard_failures == ()
+    assert result.coverage.mandatory_coverage == 1.0
+    assert result.coverage.optional_coverage == 0.0
+
+    assert optional_state.state == EvidenceState.OPTIONAL_MISSING
+    assert optional_state.evidence_item_ids == ()
+
+    bundle = result.validated_evidence_bundle
+
+    assert bundle is not None
+
+    assert all(
+        item.key != "test.notes"
+        for item in bundle.evidence_snapshot().evidence_items
+    )
+
+
+def test_restricted_optional_evidence_is_excluded_without_rejecting():
+    analysis, snapshot, context = make_case(optional=True)
+
+    optional_item = next(
+        item
+        for item in snapshot.evidence_items
+        if item.type == EvidenceType.METADATA
+        and item.key == "test.notes"
+    )
+
+    snapshot = snapshot.model_copy(
+        update={
+            "evidence_items": tuple(
+                item.model_copy(
+                    update={"access_label": "restricted"}
+                )
+                if item.evidence_id == optional_item.evidence_id
+                else item
+                for item in snapshot.evidence_items
+            )
+        }
+    )
+
+    context = context.model_copy(
+        update={
+            "sources": tuple(
+                reference.model_copy(
+                    update={"access_label": "restricted"}
+                )
+                if (
+                    reference.source == optional_item.source
+                    and reference.provenance_id
+                    == optional_item.provenance_id
+                    and reference.key == optional_item.key
+                )
+                else reference
+                for reference in context.sources
+            )
+        }
+    )
+
+    result = evaluate_case(analysis, snapshot, context)
+
+    assert result.decision == Decision.GENERATE
+    assert result.hard_failures == ()
+    assert result.coverage.mandatory_coverage == 1.0
+    assert result.coverage.optional_coverage == 0.0
+
+    bundle = result.validated_evidence_bundle
+
+    assert bundle is not None
+
+    assert all(
+        item.evidence_id != optional_item.evidence_id
+        for item in bundle.evidence_snapshot().evidence_items
+    )

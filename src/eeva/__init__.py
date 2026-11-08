@@ -4,6 +4,11 @@ from src.eeva.coverage import (
     CoverageResult,
     calculate_coverage,
 )
+from src.eeva.conflicts import (
+    ConflictFinding,
+    ConflictReport,
+    detect_conflicts,
+)
 from src.eeva.decision import (
     Decision,
     EEVAResult,
@@ -33,6 +38,8 @@ from src.eeva.validation import (
 
 __all__ = [
     "ConflictAssessment",
+    "ConflictFinding",
+    "ConflictReport",
     "CoverageResult",
     "Decision",
     "EEVAResult",
@@ -47,6 +54,7 @@ __all__ = [
     "ValidationContext",
     "calculate_coverage",
     "collect_reason_codes",
+    "detect_conflicts",
     "evaluate_evidence",
     "reason_for_state",
     "snapshot_fingerprint",

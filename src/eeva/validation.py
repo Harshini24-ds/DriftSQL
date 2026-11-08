@@ -475,7 +475,11 @@ def validate_obligations(
             item.access_label not in context.allowed_access_labels
             for item in candidates
         ):
-            state = EvidenceState.UNAUTHORIZED
+            state = (
+                EvidenceState.UNAUTHORIZED
+                if obligation.mandatory
+                else EvidenceState.OPTIONAL_MISSING
+            )
 
         elif (
             obligation.requirement_id
